@@ -16,15 +16,15 @@ public class CommitMessageTest {
 
     @Test
     public void testTwiceWrap() {
-        String text = """
-                Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
-                """;
+        String text =
+                "Lorem ipsum dolor sit amet, consectetur adipiscing\n" +
+                "elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n" +
+                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi\n" +
+                "ut aliquip ex ea commodo consequat. Duis aute irure dolor in\n" +
+                "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla\n" +
+                "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa\n" +
+                "qui officia deserunt mollit anim id est laborum.\n"
+                ;
         String wrap1 = normalizeParagraph(text);
         String wrap2 = normalizeParagraph(wrap1);
 
@@ -91,16 +91,16 @@ public class CommitMessageTest {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 "",
                 true);
-        String expected = """
-                [feat]: break everything
-                                
-                Broken: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.""";
+        String expected =
+                "[feat]: break everything\n" +
+                "\n" +
+                "Broken: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\n" +
+                "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad\n" +
+                "minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip\n" +
+                "ex ea commodo consequat. Duis aute irure dolor in reprehenderit in\n" +
+                "voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur\n" +
+                "sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt\n" +
+                "mollit anim id est laborum.;\n" ;
         check(commitMessage, expected);
     }
 

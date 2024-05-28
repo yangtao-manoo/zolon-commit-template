@@ -4,7 +4,6 @@ import com.intellij.openapi.project.Project;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.Enumeration;
 import java.util.Objects;
 
 /**
@@ -21,18 +20,7 @@ public class CommitPanel {
     private JTextArea broken;
     private JTextField related;
     private JCheckBox wrapText;
-    private JRadioButton featRadioButton;
-    private JRadioButton fixRadioButton;
-    private JRadioButton docsRadioButton;
-    private JRadioButton styleRadioButton;
-    private JRadioButton refactorRadioButton;
-    private JRadioButton perfRadioButton;
-    private JRadioButton testRadioButton;
-    private JRadioButton buildRadioButton;
-    private JRadioButton ciRadioButton;
-    private JRadioButton choreRadioButton;
-    private JRadioButton revertRadioButton;
-    private ButtonGroup changeTypeGroup;
+    private JComboBox<ChangeType> changeType;
 
     CommitPanel(Project project, CommitMessage commitMessage) {
         File workingDirectory = new File(Objects.requireNonNull(project.getBasePath()));
@@ -44,6 +32,9 @@ public class CommitPanel {
 
         if (commitMessage != null) {
             restoreValuesFromParsedCommitMessage(commitMessage);
+        }
+        for (ChangeType type : ChangeType.values()) {
+            changeType.addItem(type);
         }
     }
 
@@ -64,26 +55,11 @@ public class CommitPanel {
     }
 
     private ChangeType getSelectedChangeType() {
-        for (Enumeration<AbstractButton> buttons = changeTypeGroup.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                return ChangeType.valueOf(button.getActionCommand().toUpperCase());
-            }
-        }
-        return null;
+        return (ChangeType) changeType.getSelectedItem();
     }
 
     private void restoreValuesFromParsedCommitMessage(CommitMessage commitMessage) {
-        if (commitMessage.getType() != null) {
-            for (Enumeration<AbstractButton> buttons = changeTypeGroup.getElements(); buttons.hasMoreElements();) {
-                AbstractButton button = buttons.nextElement();
-
-                if (button.getActionCommand().equalsIgnoreCase(commitMessage.getType().label())) {
-                    button.setSelected(true);
-                }
-            }
-        }
+        changeType.setSelectedItem(commitMessage.getType());
         scope.setSelectedItem(commitMessage.getScope());
         subject.setText(commitMessage.getSubject());
         details.setText(commitMessage.getDetails());
