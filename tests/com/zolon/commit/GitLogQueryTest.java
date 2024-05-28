@@ -16,6 +16,11 @@ public class GitLogQueryTest {
     @Test
     @Ignore("manual testing")
     public void testExecute() {
+
+        for (ChangeType value : ChangeType.values()) {
+            System.out.println(value);
+        }
+
         GitLogQuery.Result result = new GitLogQuery(new File("<absolute path>")).execute();
 
         System.out.println(result.isSuccess());
