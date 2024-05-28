@@ -1,4 +1,4 @@
-package com.leroymerlin.commit;
+package com.zolon.commit;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,6 +13,12 @@ import java.util.regex.Pattern;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Base from <a href="https://github.com/MobileTribe/commit-template-idea-plugin">MobileTribe/commit-template-idea-plugin</a>
+ *
+ * @author Damien Arrachequesne
+ * @author manoo
+ */
 class GitLogQuery {
     private static final String GIT_LOG_COMMAND = "git log --all --format=%s";
     private static final Pattern COMMIT_FIRST_LINE_FORMAT = Pattern.compile("^[a-z]+\\((.+)\\):.*");

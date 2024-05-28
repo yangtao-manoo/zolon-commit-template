@@ -1,10 +1,16 @@
-package com.leroymerlin.commit;
+package com.zolon.commit;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
 
+/**
+ * Base from <a href="https://github.com/MobileTribe/commit-template-idea-plugin">MobileTribe/commit-template-idea-plugin</a>
+ *
+ * @author Damien Arrachequesne
+ * @author manoo
+ */
 public class GitLogQueryTest {
 
     @Test

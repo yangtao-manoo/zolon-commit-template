@@ -3,14 +3,16 @@
 This plugin allows to create a commit message with the following template:
 
 ```
-<type>(<scope>): <subject>
+[<type>](<scope>): <subject>
 <BLANK LINE>
-<body>
+<details>
 <BLANK LINE>
-<footer>
+<broken changes>
+<related issues>
 ```
 
-From the contribution guidelines of the Angular project [here](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit-message-format).
+Based from the contribution guidelines of the Angular
+project [here](https://github.com/angular/angular.js/blob/v1.6.6/CONTRIBUTING.md#commit-message-format).
 
 ## Installation
 
@@ -18,15 +20,9 @@ Install directly from the IDE plugin manager (File > Settings > Plugins > Browse
 
 ## Usage
 
-![Commit-step1](static/commit-template-1.png)
-
-![Commit-step2](static/commit-template-2.png)
-
-![Commit-step3](static/commit-template-3.png)
-
 ## Partner
 
-<img src="static/lm.jpg" alias="Leroy Merlin" width="120" height="120">
+<img src="static/lm.jpg" alias="Leroy Merlin" width="120" height="120" alt="Leroy Merlin">
 
 ## License
 

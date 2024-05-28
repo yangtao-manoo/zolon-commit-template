@@ -1,23 +1,26 @@
-package com.leroymerlin.commit;
+package com.zolon.commit;
 
 import com.intellij.openapi.project.Project;
 
 import javax.swing.*;
 import java.io.File;
 import java.util.Enumeration;
+import java.util.Objects;
 
 /**
+ * Base from <a href="https://github.com/MobileTribe/commit-template-idea-plugin">MobileTribe/commit-template-idea-plugin</a>
+ *
  * @author Damien Arrachequesne
+ * @author manoo
  */
 public class CommitPanel {
     private JPanel mainPanel;
-    private JComboBox<String> changeScope;
-    private JTextField shortDescription;
-    private JTextArea longDescription;
-    private JTextArea breakingChanges;
-    private JTextField closedIssues;
-    private JCheckBox wrapTextCheckBox;
-    private JCheckBox skipCICheckBox;
+    private JComboBox<String> scope;
+    private JTextField subject;
+    private JTextArea details;
+    private JTextArea broken;
+    private JTextField related;
+    private JCheckBox wrapText;
     private JRadioButton featRadioButton;
     private JRadioButton fixRadioButton;
     private JRadioButton docsRadioButton;
@@ -32,11 +35,11 @@ public class CommitPanel {
     private ButtonGroup changeTypeGroup;
 
     CommitPanel(Project project, CommitMessage commitMessage) {
-        File workingDirectory = new File(project.getBasePath());
+        File workingDirectory = new File(Objects.requireNonNull(project.getBasePath()));
         GitLogQuery.Result result = new GitLogQuery(workingDirectory).execute();
         if (result.isSuccess()) {
-            changeScope.addItem(""); // no value by default
-            result.getScopes().forEach(changeScope::addItem);
+            scope.addItem(""); // no value by default
+            result.getScopes().forEach(scope::addItem);
         }
 
         if (commitMessage != null) {
@@ -51,13 +54,12 @@ public class CommitPanel {
     CommitMessage getCommitMessage() {
         return new CommitMessage(
                 getSelectedChangeType(),
-                (String) changeScope.getSelectedItem(),
-                shortDescription.getText().trim(),
-                longDescription.getText().trim(),
-                breakingChanges.getText().trim(),
-                closedIssues.getText().trim(),
-                wrapTextCheckBox.isSelected(),
-                skipCICheckBox.isSelected()
+                (String) scope.getSelectedItem(),
+                subject.getText().trim(),
+                details.getText().trim(),
+                broken.getText().trim(),
+                related.getText().trim(),
+                wrapText.isSelected()
         );
     }
 
@@ -73,20 +75,19 @@ public class CommitPanel {
     }
 
     private void restoreValuesFromParsedCommitMessage(CommitMessage commitMessage) {
-        if (commitMessage.getChangeType() != null) {
+        if (commitMessage.getType() != null) {
             for (Enumeration<AbstractButton> buttons = changeTypeGroup.getElements(); buttons.hasMoreElements();) {
                 AbstractButton button = buttons.nextElement();
 
-                if (button.getActionCommand().equalsIgnoreCase(commitMessage.getChangeType().label())) {
+                if (button.getActionCommand().equalsIgnoreCase(commitMessage.getType().label())) {
                     button.setSelected(true);
                 }
             }
         }
-        changeScope.setSelectedItem(commitMessage.getChangeScope());
-        shortDescription.setText(commitMessage.getShortDescription());
-        longDescription.setText(commitMessage.getLongDescription());
-        breakingChanges.setText(commitMessage.getBreakingChanges());
-        closedIssues.setText(commitMessage.getClosedIssues());
-        skipCICheckBox.setSelected(commitMessage.isSkipCI());
+        scope.setSelectedItem(commitMessage.getScope());
+        subject.setText(commitMessage.getSubject());
+        details.setText(commitMessage.getDetails());
+        broken.setText(commitMessage.getBroken());
+        related.setText(commitMessage.getRelated());
     }
 }

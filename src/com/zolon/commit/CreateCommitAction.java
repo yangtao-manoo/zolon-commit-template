@@ -1,4 +1,4 @@
-package com.leroymerlin.commit;
+package com.zolon.commit;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -8,15 +8,19 @@ import com.intellij.openapi.vcs.CheckinProjectPanel;
 import com.intellij.openapi.vcs.CommitMessageI;
 import com.intellij.openapi.vcs.VcsDataKeys;
 import com.intellij.openapi.vcs.ui.Refreshable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
+ * Base from <a href="https://github.com/MobileTribe/commit-template-idea-plugin">MobileTribe/commit-template-idea-plugin</a>
+ *
  * @author Damien Arrachequesne
+ * @author manoo
  */
 public class CreateCommitAction extends AnAction implements DumbAware {
 
     @Override
-    public void actionPerformed(AnActionEvent actionEvent) {
+    public void actionPerformed(@NotNull AnActionEvent actionEvent) {
         CommitMessageI commitPanel = getCommitPanel(actionEvent);
         if (commitPanel == null) return;
 

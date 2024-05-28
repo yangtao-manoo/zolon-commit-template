@@ -1,9 +1,12 @@
-package com.leroymerlin.commit;
+package com.zolon.commit;
 
 /**
  * From https://github.com/commitizen/conventional-commit-types
+ * <p>
+ * Base from <a href="https://github.com/MobileTribe/commit-template-idea-plugin">MobileTribe/commit-template-idea-plugin</a>
  *
  * @author Damien Arrachequesne
+ * @author manoo
  */
 public enum ChangeType {
 

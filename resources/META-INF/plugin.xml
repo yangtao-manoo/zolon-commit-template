@@ -1,7 +1,7 @@
 <idea-plugin>
-    <id>commit-template-idea-plugin</id>
-    <name>Git Commit Template</name>
-    <version>1.2.0</version>
+    <id>zolon-commit-template-idea-plugin</id>
+    <name>Zolon Git Commit Template</name>
+    <version>1.0.0</version>
 
     <vendor email="damien.arrachequesne@gmail.com" />
 
@@ -9,7 +9,7 @@
         <p>Create a commit message with the following template:</p>
 
         <pre>
-        &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+        [&lt;type&gt];(&lt;scope&gt;): &lt;subject&gt;
         &lt;BLANK LINE&gt;
         &lt;body&gt;
         &lt;BLANK LINE&gt;
@@ -26,7 +26,7 @@
     </extensions>
 
     <actions>
-        <action id="Commit.Button" class="com.leroymerlin.commit.CreateCommitAction"
+        <action id="Commit.Button" class="com.zolon.commit.CreateCommitAction"
                 text="Create commit message"
                 description="Create commit message"
                 icon="/icons/load.png">
