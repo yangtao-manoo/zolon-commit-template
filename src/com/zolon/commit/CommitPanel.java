@@ -5,6 +5,7 @@ import com.intellij.openapi.project.Project;
 import javax.swing.*;
 import java.io.File;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Base from <a href="https://github.com/MobileTribe/commit-template-idea-plugin">MobileTribe/commit-template-idea-plugin</a>
@@ -36,6 +37,10 @@ public class CommitPanel {
         for (ChangeType type : ChangeType.values()) {
             changeType.addItem(type);
         }
+        ChangeType selectType = Optional.ofNullable(commitMessage)
+                .map(CommitMessage::getType)
+                .orElse(ChangeType.FEAT);
+        changeType.setSelectedItem(selectType);
     }
 
     JPanel getMainPanel() {
